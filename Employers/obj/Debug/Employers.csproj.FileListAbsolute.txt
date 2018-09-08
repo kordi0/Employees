@@ -1,0 +1,16 @@
+C:\repos\Employers\Employers\bin\Debug\Employers.exe.config
+C:\repos\Employers\Employers\bin\Debug\Employers.exe
+C:\repos\Employers\Employers\bin\Debug\Employers.pdb
+C:\repos\Employers\Employers\bin\Debug\BL.dll
+C:\repos\Employers\Employers\bin\Debug\DAL.dll
+C:\repos\Employers\Employers\bin\Debug\BL.pdb
+C:\repos\Employers\Employers\bin\Debug\DAL.pdb
+C:\repos\Employers\Employers\obj\Debug\Employers.csprojAssemblyReference.cache
+C:\repos\Employers\Employers\obj\Debug\Employers.frmMain.resources
+C:\repos\Employers\Employers\obj\Debug\Employers.frmAddDepartment.resources
+C:\repos\Employers\Employers\obj\Debug\Employers.Properties.Resources.resources
+C:\repos\Employers\Employers\obj\Debug\Employers.csproj.GenerateResource.cache
+C:\repos\Employers\Employers\obj\Debug\Employers.csproj.CoreCompileInputs.cache
+C:\repos\Employers\Employers\obj\Debug\Employers.csproj.CopyComplete
+C:\repos\Employers\Employers\obj\Debug\Employers.exe
+C:\repos\Employers\Employers\obj\Debug\Employers.pdb

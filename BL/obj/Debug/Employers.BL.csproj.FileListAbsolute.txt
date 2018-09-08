@@ -1,0 +1,9 @@
+C:\repos\Employers\BL\bin\Debug\BL.dll
+C:\repos\Employers\BL\bin\Debug\BL.pdb
+C:\repos\Employers\BL\bin\Debug\DAL.dll
+C:\repos\Employers\BL\bin\Debug\DAL.pdb
+C:\repos\Employers\BL\obj\Debug\Employers.BL.csprojAssemblyReference.cache
+C:\repos\Employers\BL\obj\Debug\Employers.BL.csproj.CoreCompileInputs.cache
+C:\repos\Employers\BL\obj\Debug\Employers.BL.csproj.CopyComplete
+C:\repos\Employers\BL\obj\Debug\BL.dll
+C:\repos\Employers\BL\obj\Debug\BL.pdb
