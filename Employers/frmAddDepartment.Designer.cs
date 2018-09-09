@@ -40,7 +40,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(73, 97);
+            this.label1.Location = new System.Drawing.Point(73, 63);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 13);
             this.label1.TabIndex = 0;
@@ -49,7 +49,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(73, 135);
+            this.label2.Location = new System.Drawing.Point(73, 101);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 1;
@@ -58,7 +58,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(73, 175);
+            this.label3.Location = new System.Drawing.Point(73, 219);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(95, 13);
             this.label3.TabIndex = 2;
@@ -66,14 +66,14 @@
             // 
             // txtDepartmentName
             // 
-            this.txtDepartmentName.Location = new System.Drawing.Point(174, 97);
+            this.txtDepartmentName.Location = new System.Drawing.Point(174, 63);
             this.txtDepartmentName.Name = "txtDepartmentName";
             this.txtDepartmentName.Size = new System.Drawing.Size(237, 20);
             this.txtDepartmentName.TabIndex = 3;
             // 
             // txtDepartmentInfo
             // 
-            this.txtDepartmentInfo.Location = new System.Drawing.Point(174, 171);
+            this.txtDepartmentInfo.Location = new System.Drawing.Point(174, 215);
             this.txtDepartmentInfo.Name = "txtDepartmentInfo";
             this.txtDepartmentInfo.Size = new System.Drawing.Size(237, 96);
             this.txtDepartmentInfo.TabIndex = 4;
@@ -82,16 +82,16 @@
             // listDepartments
             // 
             this.listDepartments.FormattingEnabled = true;
-            this.listDepartments.Location = new System.Drawing.Point(174, 135);
+            this.listDepartments.Location = new System.Drawing.Point(174, 101);
             this.listDepartments.Name = "listDepartments";
-            this.listDepartments.Size = new System.Drawing.Size(237, 30);
+            this.listDepartments.Size = new System.Drawing.Size(237, 95);
             this.listDepartments.TabIndex = 5;
             this.listDepartments.SelectedIndexChanged += new System.EventHandler(this.listDepartments_SelectedIndexChanged);
             // 
             // btnDepartmentAdd
             // 
             this.btnDepartmentAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.btnDepartmentAdd.Location = new System.Drawing.Point(161, 294);
+            this.btnDepartmentAdd.Location = new System.Drawing.Point(161, 338);
             this.btnDepartmentAdd.Name = "btnDepartmentAdd";
             this.btnDepartmentAdd.Size = new System.Drawing.Size(211, 44);
             this.btnDepartmentAdd.TabIndex = 6;

@@ -15,9 +15,21 @@ namespace Employers
 {
     public partial class frmMain : Form
     {
+        
         public frmMain()
         {
             InitializeComponent();
+        }
+        public void MakeNode(int parentId, int parentNode, string name)
+        {
+            if (parentId == parentNode)
+            {
+                treeDepartments.Nodes[1].Nodes.Add(new TreeNode(name));
+            }
+            else
+            {
+                MakeNode(parentId, parentNode + 1, name);
+            }
         }
 
         private void btnAddDepartment_Click(object sender, EventArgs e)
@@ -32,20 +44,25 @@ namespace Employers
             var DepartmentsLoad = new Logic();
             List<Department> departments = new List<Department>();
             departments = DepartmentsLoad.GetDepartments();
-            var longestNode = departments.Max(x => x.OverId);
-            int i = 0;
-            while (i < 10)
+            List<Department> SortedList = departments.OrderBy(x => x.Id).ToList();
+            List<Department> ChildDepartments = new List<Department>();
+            foreach (var i in SortedList)
             {
-                foreach (var j in departments)
+                if (i.OverId == 0)
                 {
-                    if (j.OverId == i)
-                    {
-                        treeDepartments.Nodes[i].Nodes.Add(j.Name);
-                    }
+                    treeDepartments.Nodes[0].Nodes.Add(i.Name);
                 }
-                i++;
+                else
+                {
+                    ChildDepartments.Add(i);
+                }
             }
-            
+            foreach (var i in ChildDepartments)
+            {
+                int ParentNode = 1;
+                MakeNode(i.OverId, ParentNode, i.Name);
+            }
+                        
         }
     }
 }

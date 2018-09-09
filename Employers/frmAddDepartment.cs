@@ -22,7 +22,7 @@ namespace Employers
             int overId = 0;
             if (listDepartments.SelectedItem != null)
             {
-                overId = 1;
+                overId = 2;
             }
             string info = txtDepartmentInfo.Text.ToString();
             string name = txtDepartmentName.Text.ToString();
