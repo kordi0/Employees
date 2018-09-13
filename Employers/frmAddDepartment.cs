@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using System.Collections.Generic;
 using DAL;
 using BL;
 
@@ -11,18 +12,25 @@ namespace Employers
         {
             InitializeComponent();
             var Initial = new Logic();
-            
-            listDepartments.Items.Clear();
-            foreach (Department item in Initial.GetDepartments())
-                listDepartments.Items.Add(item.Name);
+
+            var root = new Department(0, 0, "0:", "Все отделы");
+            var AllDepartmentsInComboBox = new List<Department>();
+            AllDepartmentsInComboBox = Initial.GetDepartments();
+            AllDepartmentsInComboBox.Insert(0, root);
+
+            cbDepartments.DataSource = AllDepartmentsInComboBox;
+            cbDepartments.DisplayMember = "Name";
+            cbDepartments.ValueMember = "Id";
+            cbDepartments.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void btnDepartmentAdd_Click(object sender, EventArgs e)
         {
             int overId = 0;
-            if (listDepartments.SelectedItem != null)
+            var SelectedParent = (Department)cbDepartments.SelectedItem;
+            if (SelectedParent != null)
             {
-                overId = 2;
+                overId = SelectedParent.Id;
             }
             string info = txtDepartmentInfo.Text.ToString();
             string name = txtDepartmentName.Text.ToString();
@@ -34,7 +42,9 @@ namespace Employers
 
         }
 
-        private void listDepartments_SelectedIndexChanged(object sender, EventArgs e)
+        
+
+        private void frmAddDepartment_Load(object sender, EventArgs e)
         {
 
         }

@@ -15,54 +15,195 @@ namespace Employers
 {
     public partial class frmMain : Form
     {
-        
+        public void RefreshTree()
+        {
+            treeDepartments.BeginUpdate();
+            try
+            {
+                treeDepartments.Nodes.Clear();
+                FillTree();
+            }
+            finally
+            {
+                treeDepartments.EndUpdate();
+            }
+        }
+        public List<Department> GetDepartmentList()
+        {
+            var DepartmentList = new Logic();
+            return DepartmentList.GetDepartments();
+        } 
+
+
+        public List<Employee> GetEmployeesList()
+        {
+            var data = new Logic();
+            return data.GetEmployees();
+        }
+            
         public frmMain()
         {
             InitializeComponent();
-        }
-        public void MakeNode(int parentId, int parentNode, string name)
-        {
-            if (parentId == parentNode)
-            {
-                treeDepartments.Nodes[1].Nodes.Add(new TreeNode(name));
-            }
-            else
-            {
-                MakeNode(parentId, parentNode + 1, name);
-            }
+            
         }
 
         private void btnAddDepartment_Click(object sender, EventArgs e)
         {
-            var f = new frmAddDepartment();
-            f.Show();
+            var form = new frmAddDepartment();
+            form.Show();
         }
 
-        private void frmMain_Load(object sender, EventArgs e)
+        public void FillChildrens(int parentId, TreeNode parent)
+        {
+            
+            
+            foreach (var child in GetDepartmentList())
+            {
+                if (parentId == child.OverId)
+                {
+                    var ChildNode = new TreeNode();
+                    ChildNode.Text = child.Name;
+                    ChildNode.Tag = child.Id;
+                    parent.Nodes.Add(ChildNode);
+                    FillChildrens(child.Id, ChildNode);
+                }
+            }
+            
+        }
+
+        public void FillTree()
         {
             treeDepartments.Nodes.Add("Все отделения");
-            var DepartmentsLoad = new Logic();
-            List<Department> departments = new List<Department>();
-            departments = DepartmentsLoad.GetDepartments();
-            List<Department> SortedList = departments.OrderBy(x => x.Id).ToList();
-            List<Department> ChildDepartments = new List<Department>();
-            foreach (var i in SortedList)
+
+
+            foreach (var parent in GetDepartmentList())
             {
-                if (i.OverId == 0)
+                if (parent.OverId == 0)
                 {
-                    treeDepartments.Nodes[0].Nodes.Add(i.Name);
-                }
-                else
-                {
-                    ChildDepartments.Add(i);
+                    var ParentNode = new TreeNode();
+                    ParentNode.Text = parent.Name;
+                    ParentNode.Tag = parent.Id;
+                    treeDepartments.Nodes[0].Nodes.Add(ParentNode);
+                    FillChildrens(parent.Id, ParentNode);
                 }
             }
-            foreach (var i in ChildDepartments)
+        } 
+        private void frmMain_Load(object sender, EventArgs e)
+        {
+            FillTree();
+        }
+
+        private void btnEditDepartment_Click(object sender, EventArgs e)
+        {
+            var form = new frmEditDepartment();
+
+            
+            if (treeDepartments.SelectedNode.Tag != null)
             {
-                int ParentNode = 1;
-                MakeNode(i.OverId, ParentNode, i.Name);
+                
+                form.Show();
+                form.Tag = Convert.ToInt32(treeDepartments.SelectedNode.Tag);
             }
-                        
+            else
+            {
+                MessageBox.Show("Выберете отдел для редактирования");
+            }
+        }
+
+        private void btnDeleteDepartment_Click(object sender, EventArgs e)
+        {
+            if (treeDepartments.SelectedNode.Tag != null)
+            {
+                var del = new CRUD();
+                MessageBox.Show(del.DeleteDepartment(Convert.ToInt32(treeDepartments.SelectedNode.Tag)));
+                RefreshTree();
+                
+            }
+            else
+            {
+                MessageBox.Show("Выберете отдел для удаления");
+            }
+            
+        }
+
+        private void btnRefreshTreeView_Click(object sender, EventArgs e)
+        {
+            RefreshTree();
+        }
+
+        public void FillListVies()
+        {
+            //
+            foreach (var emp in GetEmployeesList())
+            {
+                if (emp.IdDepartment == Convert.ToInt32(treeDepartments.SelectedNode.Tag))
+                {
+                    string Gender = "Неизвестно";
+                    if (emp.Gender == 0)
+                    {
+                        Gender = "муж";
+                    }
+                    else
+                    {
+                        Gender = "жен";
+                    }
+                    string Department = GetDepartmentList().Find(x => x.Id == emp.IdDepartment).Name;
+                    string[] par = { emp.Name, emp.Position, Department, Gender, emp.Mobile };
+                    ListViewItem employee = new ListViewItem(par);
+                    employee.Tag = emp.Id;
+                    lwEmployees.Items.Add(employee);
+                }
+
+            }
+        }
+        private void treeDepartments_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            lwEmployees.Items.Clear();
+            FillListVies();
+        }
+
+        private void btnAddEmplyee_Click(object sender, EventArgs e)
+        {
+            var frmAdd = new frmAddEmployee();
+            frmAdd.Show();
+            frmAdd.Tag = Convert.ToInt32(treeDepartments.SelectedNode.Tag);
+        }
+
+        private void btnEditEmplyee_Click(object sender, EventArgs e)
+        {
+            if (SelectedEmployee == 0)
+            {
+                MessageBox.Show("Сначала выберете работника для редактирования");
+            }
+            else
+            {
+                var frmEdit = new frmEditEmloyee();
+                frmEdit.Tag = SelectedEmployee;
+                frmEdit.Show();
+            }
+            
+            
+        }
+
+        public int SelectedEmployee = 0;
+        private void lwEmployees_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            SelectedEmployee = Convert.ToInt32(e.Item.Tag);
+        }
+
+        private void btnDeleteEmployee_Click(object sender, EventArgs e)
+        {
+            if (SelectedEmployee == 0)
+            {
+                MessageBox.Show("Сначала выберете работника для удаления");
+            }
+            else
+            {
+                var del = new Logic();
+                MessageBox.Show(del.DeleteEmployee(SelectedEmployee));
+                lwEmployees.Items.Clear();
+                FillListVies();
+            }
         }
     }
 }

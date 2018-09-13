@@ -14,3 +14,6 @@ C:\repos\Employers\Employers\obj\Debug\Employers.csproj.CoreCompileInputs.cache
 C:\repos\Employers\Employers\obj\Debug\Employers.csproj.CopyComplete
 C:\repos\Employers\Employers\obj\Debug\Employers.exe
 C:\repos\Employers\Employers\obj\Debug\Employers.pdb
+C:\repos\Employers\Employers\obj\Debug\Employers.frmEditDepartment.resources
+C:\repos\Employers\Employers\obj\Debug\Employers.frmAddEmployee.resources
+C:\repos\Employers\Employers\obj\Debug\Employers.frmEditEmloyee.resources

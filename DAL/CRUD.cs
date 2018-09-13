@@ -29,12 +29,11 @@ namespace DAL
                         int id = reader.GetInt32(0);
                         int idDepartment = reader.GetInt32(1);
                         string name = reader.GetString(2);
-                        DateTime date = reader.GetDateTime(3);
-                        string mobile = reader.GetString(4);
-                        string position = reader.GetString(5);
-                        int gender = reader.GetInt32(6);
+                        string mobile = reader.GetString(3);
+                        string position = reader.GetString(4);
+                        int gender = reader.GetInt32(5);
 
-                        Employees.Add(new Employee(id, idDepartment,name, date, mobile, position, gender));
+                        Employees.Add(new Employee(id, idDepartment,name, mobile, position, gender));
                         
 
                     }
@@ -81,10 +80,10 @@ namespace DAL
                 }
             }
         }
-        public string CreateEmloyee(object employee)
+        public string CreateEmployee(object employee)
         {
             var employeeAdded = (Employee)employee;
-            string sqlInsert = $"INSERT INTO Employees (IdDepartment, Name, Birthday, MobilePhone, Position, Gender) VALUES ({employeeAdded.IdDepartment}, '{employeeAdded.Name}', {employeeAdded.Date}, '{employeeAdded.Mobile}', '{employeeAdded.Position}', {employeeAdded.Gender})";
+            string sqlInsert = $"INSERT INTO Employees (IdDepartment, Name, MobilePhone, Position, Gender) VALUES ({employeeAdded.IdDepartment}, '{employeeAdded.Name}', '{employeeAdded.Mobile}', '{employeeAdded.Position}', {employeeAdded.Gender})";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
@@ -106,6 +105,64 @@ namespace DAL
                 return ($"Добавлено департаментов: {number}");
 
             }
+        }
+        public string EditDepartment(object department)
+        {
+            var departmentEdited = (Department)department;
+            string sqlInsert = $"UPDATE Departments SET OverId={departmentEdited.OverId}, Name='{departmentEdited.Name}', Info='{departmentEdited.Info}' WHERE Id={departmentEdited.Id}";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlInsert, connection);
+                int number = command.ExecuteNonQuery();
+                return ($"Изменено департаментов: {number}");
+
+            }
+        }
+        public string DeleteDepartment(object department)
+        {
+            var departmentDeleted = (int)department;
+            string sqlInsert = $"DELETE FROM Departments WHERE Id={departmentDeleted} OR OverId={departmentDeleted}";
+            string sqlInsert1 = $"DELETE FROM Employees WHERE IdDepartment={departmentDeleted}";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlInsert, connection);
+                SqlCommand command1 = new SqlCommand(sqlInsert1, connection);
+                int number = command.ExecuteNonQuery();
+                int number1 = command1.ExecuteNonQuery();
+                return ($"Удалено департаментов: {number} /br Удалено работников: {number1}");
+
+            }
+            
+        }
+
+        public string EditEmployee(object Employees)
+        {
+            var EmployeesEdited = (Employee)Employees;
+            string sqlInsert = $"UPDATE Employees SET IdDepartment={EmployeesEdited.IdDepartment}, Name='{EmployeesEdited.Name}', MobilePhone='{EmployeesEdited.Mobile}', Position='{EmployeesEdited.Position}', Gender={EmployeesEdited.Gender} WHERE Id={EmployeesEdited.Id}";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlInsert, connection);
+                int number = command.ExecuteNonQuery();
+                return ($"Изменено работников: {number}");
+
+            }
+        }
+        public string DeleteEmployee(int Employees)
+        {
+            int EmployeesDeleted = Employees;
+            string sqlInsert = $"DELETE FROM Employees WHERE Id={EmployeesDeleted}";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand(sqlInsert, connection);
+                int number = command.ExecuteNonQuery();
+                return ($"Удалено работников: {number}");
+
+            }
+
         }
     }
 }
