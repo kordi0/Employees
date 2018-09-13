@@ -62,9 +62,6 @@
             // cbGender
             // 
             this.cbGender.FormattingEnabled = true;
-            this.cbGender.Items.AddRange(new object[] {
-            "Мужской",
-            "Женский"});
             this.cbGender.Location = new System.Drawing.Point(206, 141);
             this.cbGender.Name = "cbGender";
             this.cbGender.Size = new System.Drawing.Size(249, 21);
