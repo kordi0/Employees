@@ -49,8 +49,16 @@ namespace Employers
 
         private void btnAddDepartment_Click(object sender, EventArgs e)
         {
-            var form = new frmAddDepartment();
+            var selectedParent = (treeDepartments.SelectedNode != null) ? Convert.ToInt32(treeDepartments.SelectedNode.Tag) : 0;
+            var form = new frmAddDepartment(selectedParent);
             form.Show();
+        }
+        public void DepartmentAdded(Department department)
+        {
+            var Add = new Logic();
+            MessageBox.Show(Add.AddDepartments(department).ToString());
+            treeDepartments.Nodes.Clear();
+            FillTree();
         }
 
         public void FillChildrens(int parentId, TreeNode parent)
@@ -59,7 +67,7 @@ namespace Employers
             
             foreach (var child in GetDepartmentList())
             {
-                if (parentId == child.OverId)
+                if (parentId == child.PartentId)
                 {
                     var ChildNode = new TreeNode();
                     ChildNode.Text = child.Name;
@@ -78,7 +86,7 @@ namespace Employers
 
             foreach (var parent in GetDepartmentList())
             {
-                if (parent.OverId == 0)
+                if (parent.PartentId == 0)
                 {
                     var ParentNode = new TreeNode();
                     ParentNode.Text = parent.Name;
@@ -94,13 +102,11 @@ namespace Employers
         }
 
         private void btnEditDepartment_Click(object sender, EventArgs e)
-        {
-            var form = new frmEditDepartment();
-
-            
+        {      
             if (treeDepartments.SelectedNode.Tag != null)
             {
-                
+                var editedDepartment = GetDepartmentList().Find(x => x.Id == Convert.ToInt32(treeDepartments.SelectedNode.Tag));
+                var form = new frmAddDepartment(editedDepartment);
                 form.Show();
                 form.Tag = Convert.ToInt32(treeDepartments.SelectedNode.Tag);
             }
@@ -108,6 +114,14 @@ namespace Employers
             {
                 MessageBox.Show("Выберете отдел для редактирования");
             }
+        }
+
+        public void DepartmentEdited(Department department)
+        {
+            var edit = new Logic();
+            MessageBox.Show(edit.EditDepartment(department).ToString());
+            RefreshTree();
+
         }
 
         private void btnDeleteDepartment_Click(object sender, EventArgs e)
@@ -177,7 +191,7 @@ namespace Employers
             }
             else
             {
-                var frmEdit = new frmEditEmloyee();
+                var frmEdit = new frmAddEmployee();
                 frmEdit.Tag = SelectedEmployee;
                 frmEdit.Show();
             }

@@ -64,18 +64,6 @@
     <Compile Include="frmAddEmployee.Designer.cs">
       <DependentUpon>frmAddEmployee.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmEditDepartment.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmEditDepartment.Designer.cs">
-      <DependentUpon>frmEditDepartment.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmEditEmloyee.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmEditEmloyee.Designer.cs">
-      <DependentUpon>frmEditEmloyee.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
@@ -86,12 +74,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmAddEmployee.resx">
       <DependentUpon>frmAddEmployee.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmEditDepartment.resx">
-      <DependentUpon>frmEditDepartment.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmEditEmloyee.resx">
-      <DependentUpon>frmEditEmloyee.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

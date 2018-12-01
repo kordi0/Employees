@@ -24,10 +24,10 @@ namespace BL
             return request.ReadEmployees();
         }
 
-        public string AddDepartments(object department)
+        public string AddDepartments(Department department)
         {
             var create = new CRUD();
-            var NewDepartment = (Department)department;
+            var NewDepartment = department;
             var checkName = GetDepartments().Find(x => x.Name == NewDepartment.Name);
             if (checkName == null)
             {
@@ -39,9 +39,9 @@ namespace BL
             }
             
         }
-        public string EditDepartment(object o)
+        public string EditDepartment(Department o)
         {
-            var O = (Department)o;
+            var O = o;
             var edit = new CRUD();
             var editedDepartment = GetDepartments().Find(x => x.Id == O.Id);
             editedDepartment = O;
@@ -53,13 +53,13 @@ namespace BL
             var delete = new CRUD();
             
             var deletedDepartment = GetDepartments().Find(x => x.Id == SelectedId);
-            return delete.DeleteDepartment(deletedDepartment).ToString();
+            return delete.DeleteDepartment(deletedDepartment.Id).ToString();
         }
 
-        public string AddEmployee(object employee)
+        public string AddEmployee(Employee employee)
         {
             var create = new CRUD();
-            var NewEmployee = (Employee)employee;
+            var NewEmployee = employee;
             var checkName = GetDepartments().Find(x => x.Name == NewEmployee.Name);
             if (checkName == null)
             {
@@ -72,10 +72,10 @@ namespace BL
 
         }
 
-        public string EditEmployee(object Employee)
+        public string EditEmployee(Employee Employee)
         {
             var edit = new CRUD();
-            var employee = (Employee)Employee;
+            var employee = Employee;
             var EditedEmployee = GetEmployees().Find(x => x.Id == employee.Id);
             EditedEmployee = employee;
             return edit.EditEmployee(EditedEmployee).ToString();

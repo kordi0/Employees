@@ -8,16 +8,16 @@ namespace DAL
 {
     public class Department
     {
-        public Department(int id, int overId, string info, string name)
+        public Department(int id, int partentId, string info, string name)
         {
             Id = id;
-            OverId = overId;
+            PartentId = partentId;
             Info = info;
             Name = name;
         }
 
         public int Id { get; set; }
-        public int OverId { get; set; }
+        public int PartentId { get; set; }
         public string Info { get; set; }
         public string Name { get; set; }
         
